@@ -1,4 +1,4 @@
-import Page from "./components/PageSolution";
+import Page from "./components/Page";
 import data from "./data";
 
 
