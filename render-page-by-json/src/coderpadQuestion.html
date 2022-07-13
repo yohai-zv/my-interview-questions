@@ -1,0 +1,160 @@
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Hello World</title>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.13.12/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+
+    const appContent = [
+      {
+        type: 'title',
+        value: `Missing Blind Golden Retriever Returns Home After Three Weeks in the Alaskan Wilderness`,
+      },
+      {
+        type: 'photo',
+        src: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F20%2F2022%2F07%2F11%2Falaska-dog.jpg',
+        tooltip: 'Cute dog',
+        description: `CREDIT: JAMES POULSON/THE DAILY SITKA SENTINEL/AP`
+      },
+      {
+        type: 'section',
+        value: `The Kubacki family's beloved blind golden retriever Lulu is safe at home again after three weeks lost in the Alaskan wilderness.`,
+      },
+      {
+        type: 'section',
+        value: `Lulu disappeared from her home in Alaska on June 18. On July 5, when the Kubackis were starting to worry if they would ever see their pet again, a construction crew in Sitka, Alaska, found Lulu hidden in some roadside brush, The Associated Press reported.`,
+      },
+      {
+        type: 'section',
+        value: `The crew first thought that Lulu was a bear when they spotted her, but after a closer look realized she was a senior dog in need of help. The weeks in the elements had left Lulu down 23 pounds, dehydrated and dirty.`,
+      },
+      {
+        type: 'anchor',
+        value: `RELATED: Missing Florida Dog Found After 'Giant' Pet Turns Up at a Dollar General and Refuses to Leave`,
+        href: 'https://people.com/pets/missing-florida-dog-found-at-dollar-general/',
+        style: { fontWeight: 'bold' }
+      },
+      {
+        type: 'section',
+        value: `"She means everything," owner Ted Kubacki said of Lulu. "I have five daughters and they're 4 to 13 years old, so they've spent every day of their life with that dog."`,
+      },
+      {
+        type: 'section',
+        value: `After weeks of searching for their "helpless" dog, the Kubackis were overjoyed when they got the call that Lulu was found.`,
+      },
+      {
+        type: 'anchor',
+        value: `RELATED: Iditarod Sled Dog Found 3 Months After Going Missing from Race Checkpoint: 'Life Is Good'`,
+        href: 'https://people.com/pets/iditarod-sled-dog-found-3-months-after-going-missing-from-race/',
+        style: { fontWeight: 'bold' }
+      },
+      {
+        type: 'section',
+        value: `"I called my wife from work and it was just screaming... She just starts yelling, then she yells to the kids. And I just hear them screaming like crazy," Kubacki said.`,
+      },
+      {
+        type: 'section',
+        value: `"Since the family reunited in July, Lulu's health has improved, thanks, in part, to her community. Local Sitka residents donated hundreds of dollars to help cover the canine's veterinarian bills so that Kubacki, a grocery store employee and sole provider for his family of seven, would not be stuck alone with the bill. `,
+      },
+
+    ]
+
+    const Title = ({ value, style, description, children }) => {
+      return <>
+        <h1 style={style}>{value}</h1>
+        {description && <h2>{description}</h2>}
+        <div>
+          <ContentBlocks blocks={children}></ContentBlocks>
+        </div>
+      </>
+    }
+    const Section = ({ value, style, children }) => {
+      return <p style={{ fontSize: '18px', ...style }} >
+        {value}
+        <>
+          <ContentBlocks blocks={children}></ContentBlocks>
+        </>
+      </p>
+    }
+
+    const Anchor = ({ value, href, style }) => {
+      return <a style={style} href={href}>
+        {value}
+      </a>
+    }
+
+    const Photo = ({ style, description, src, tooltip, children }) => {
+
+      return <>
+        <img style={{ width: '100%', ...style }} src={src} title={tooltip} alt={description} />
+        {description && <div>{description}</div>}
+        <div>
+          <ContentBlocks blocks={children}></ContentBlocks>
+        </div>
+      </>
+    }
+
+    const Tab = ({ value, style, children }) => {
+      const [isOpen, toggle] = useState(false);
+      return <><button type="button" onClick={() => toggle(isOpen => !isOpen)}>{value}</button>
+        {isOpen && <div >
+          <ContentBlocks blocks={children}></ContentBlocks>
+        </div>}
+      </>
+    }
+
+    const ContentBlock = ({ contentBlock }) => {
+      switch (contentBlock.type) {
+        case 'title': {
+          return <Title {...contentBlock} />
+        }
+        case 'section': {
+          return <Section {...contentBlock} />
+        }
+        case 'anchor': {
+          return <Anchor {...contentBlock} />
+        }
+        case 'tab': {
+          return <Tab {...contentBlock} />
+        }
+        case 'photo': {
+          return <Photo {...contentBlock} />
+        }
+        default: {
+          return null
+        }
+      }
+    }
+
+
+    const ContentBlocks = ({ blocks = [] }) => {
+
+      return blocks.map(block => <ContentBlock contentBlock={block} />)
+    }
+
+    const Page = ({ content = [] }) => {
+
+      return <div style={{ width: "720px", margin: '0 auto' }}><ContentBlocks blocks={content} /></div>
+    }
+
+    const App = () => {
+      return (
+        <div className="App">
+          <Page content={appContent} />
+        </div>
+      )
+    }
+
+    ReactDOM.render(
+      <App />,
+      document.getElementById('root')
+    );
+  </script>
+</body>
+</html>
