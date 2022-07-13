@@ -1,5 +1,3 @@
-import React from 'react';
-
 const CommentText = ({ comment }) => (<div
   style={{
     padding: '12px 16px',
@@ -15,17 +13,17 @@ const CommentText = ({ comment }) => (<div
 
 const CommentCard = (
     {
-      className,
       user,
       comment,
       date,
     }
   ) => {
+
     return (
       <div
-        className={className}
         style={
           {
+            width: 400,
             border: `1px solid #dcdcdc`,
             borderRadius: '4px',
             backgroundColor: 'white',
@@ -56,7 +54,7 @@ const CommentCard = (
                 marginLeft: '4px',
               }}
             >
-              {user.name}
+              {user}
             </span>
           </div>
           <div>{date.toISOString().substring(0, 10)}</div>

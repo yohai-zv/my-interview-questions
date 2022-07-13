@@ -6,14 +6,7 @@ const date = new Date();
 function App() {
   return (
     <div className="App">
-     <CommentCard 
-     user ={ {
-       name: 'Liron Zluf',
-      }}
-      date={date}
-      comment = 'This is a comment'
-
-       />
+     <CommentCard comment={'first comment'} date={date} user='some user'/>
     </div>
   );
 }
