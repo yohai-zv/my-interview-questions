@@ -1,11 +1,11 @@
-import Circle from "./Circle";
+import Square from "./Square";
 
 
 
 function App() {
   return (
     <div className="App">
-     <Circle />
+     <Square />
     </div>
   );
 }

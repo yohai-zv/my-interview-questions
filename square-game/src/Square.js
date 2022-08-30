@@ -1,5 +1,5 @@
 import {useState} from 'react'
-const Circle = ()=>{
+const Square = ()=>{
 
   const [count, setCount] = useState([]);
 
@@ -16,9 +16,9 @@ style={{
   margin: '10px'
 }}>
   <div style = {{display:'flex'}}>
-  {count.map(()=><Circle/>)}
+  {count.map(()=><Square/>)}
   </div>
 </div>
 }
 
-export default Circle;
+export default Square;
